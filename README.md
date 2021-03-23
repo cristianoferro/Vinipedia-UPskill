@@ -6,6 +6,6 @@
 [![Upskill page](https://upskill.pt/wp-content/uploads/2020/03/cropped-APDC_UPSKILLS_Logo-300x83.png)](https://upskill.pt/)
 
 ---
-Installing project instructions:
+#### Installing project instructions:
 
-### `pip install -r requirements.txt`
+###### `pip install -r requirements.txt`
