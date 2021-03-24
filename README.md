@@ -9,3 +9,5 @@
 #### Installing project instructions:
 
 ###### `pip install -r requirements.txt`
+###### `py manage.py (para não dar erro ao fazer pull)`
+

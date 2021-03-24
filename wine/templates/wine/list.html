@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Wine List</title>
+</head>
+<body>
+<h1>Wine list</h1>
+
+{% for wine in wines %}
+
+    <p><b>{{ wine.name }}</b>, <i>{{ wine.producer }}</i></p>
+    <p>{{ wine.description }}</p>
+    <br />
+
+{% empty %}
+
+    <p>
+        There are no wines in the DB yet.
+    </p>
+
+{% endfor %}
+
+</body>
+</html>
