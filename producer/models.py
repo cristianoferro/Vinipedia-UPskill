@@ -1,6 +1,6 @@
 from django.db import models
 
-# Create your models here.
+
 class Producer(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
@@ -9,6 +9,7 @@ class Producer(models.Model):
         # db_index=True,
         unique=True, blank=True
     )
+
 
 class ProducerPicture(models.Model):
     pathname = models.ImageField(upload_to='images/producers/', blank=True)
