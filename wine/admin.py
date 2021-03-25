@@ -3,9 +3,9 @@ from wine.models import Wine, Grape, Evaluation
 
 @admin.register(Wine)
 class WineAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description', 'producer')
-    list_filter = ('name', 'producer')
-    # (Investigar!) filter_horizontal = ('producer',)
+    list_display = ('name', 'description', 'producer', 'picture')
+    list_filter = ('name', 'producer', 'grapes')
+    filter_horizontal = ('grapes',)
 
 @admin.register(Grape)
 class GrapesAdmin(admin.ModelAdmin):

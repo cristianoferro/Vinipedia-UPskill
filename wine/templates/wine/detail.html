@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Wine Detail</h1>
+
+    <p><b>{{ wine.name }}</b>, <i>{{ wine.producer }}</i></p>
+    <p>{{ wine.description }}</p>
+    {% if wine.picture %}
+        <img src="{{ wine.picture.url}}" alt="{{ wine.name }}">
+    {% else %}
+        <p>no image</p>
+    {% endif %}
+{% for grape in wine.grapes.all %}
+    <h3>{{ grape.name }}</h3>
+    <p>{{ grape.description }}</p>
+    <img src={{ grape.picture.url }} alt={{ grape.name }}/>
+{% endfor %}
+    <br />
+
+{% endblock %}

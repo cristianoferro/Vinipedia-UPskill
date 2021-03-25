@@ -3,20 +3,6 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from producer.models import Producer
 
-
-class Wine(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField(blank=True)
-    producer = models.ForeignKey(Producer, on_delete=models.CASCADE)
-
-    # Sem o método 'str' aparece object no site do admin
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        ordering = ("name", )
-
-
 class Grape(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
@@ -27,6 +13,21 @@ class Grape(models.Model):
 
     class Meta:
         ordering = ("name", )
+
+class Wine(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
+    producer = models.ForeignKey(Producer, on_delete=models.CASCADE)
+    grapes = models.ManyToManyField(Grape)
+    picture = models.ImageField(upload_to='images/wines/', blank=True)
+
+    # Sem o método 'str' aparece object no site do admin
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ("name", )
+
 
 
 class Evaluation(models.Model):

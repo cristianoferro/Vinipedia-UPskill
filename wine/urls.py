@@ -1,8 +1,9 @@
 from django.urls import path
-from wine import views
+from wine.views import WineDetail, WineList
 
 app_name = 'wine'
 
 urlpatterns = [
-    path('', views.WineList.as_view(), name='wine_list'),
+    path('', WineList.as_view(), name='wine_list'),
+    path('detail/<int:pk>', WineDetail.as_view(), name='wine_detail'),
 ]
