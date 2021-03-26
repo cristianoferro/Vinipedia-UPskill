@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Producer List</h1>
+
+{% for producer in producers %}
+
+    <p><b><a href="{{ producer.get_absolute_url }}" >{{ producer.name }}</a></b>, <i>{{ producer.website }}</i></p>
+    <p>{{ producer.description }}</p>
+    <br />
+
+{% empty %}
+
+    <p>
+        There are no producers in the DB yet.
+    </p>
+
+{% endfor %}
+
+{% endblock %}

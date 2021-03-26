@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
+from wine.models import Wine, Evaluation
 
-from wine.models import Wine
 
 class WineList(ListView):   # (Substitui o view abaixo!)
     template_name = 'wine/list.html'
@@ -19,3 +19,8 @@ class WineDetail(DetailView):
 #     wines = Wine.objects.all()
 #
 #     return render(request, 'wine/list.html', {'wines': wines})  # 'wines' é o nome da variável a se usar no template html
+
+class EvaluationList(ListView):
+    model = Evaluation
+    template_name = 'wine/evaluation.html'
+    context_object_name = 'evaluations'
