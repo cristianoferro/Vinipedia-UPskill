@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class Producer(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
@@ -12,9 +11,11 @@ class Producer(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return "/producer/detail/%i/" % self.id
+
     class Meta:
         ordering = ("name",)
-
 
 class ProducerPicture(models.Model):
     pathname = models.ImageField(upload_to='images/producers/', blank=True)

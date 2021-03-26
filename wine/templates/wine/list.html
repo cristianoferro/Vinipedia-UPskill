@@ -4,7 +4,7 @@
 
 {% for wine in wines %}
 
-    <p><b>{{ wine.name }}</b>, <i>{{ wine.producer }}</i></p>
+<p><b><a href="{{ wine.get_absolute_url }}">{{ wine.name }}</a></b>, <i>{{ wine.producer }}</i></p>
     <p>{{ wine.description }}</p>
     <br />
 

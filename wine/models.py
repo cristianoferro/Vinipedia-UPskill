@@ -25,14 +25,15 @@ class Wine(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return "/detail/%i/" % self.id
+
     class Meta:
         ordering = ("name", )
 
-
-
 class Evaluation(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    wine = models.ForeignKey(Wine, on_delete=models.CASCADE)
+    wine = models.ForeignKey(Wine, on_delete=models.CASCADE, related_name="evaluations")
     description = models.TextField()
     score = models.IntegerField(
         default=1,
