@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Search results:</h1>
+    {% for wine in wines %}
+        <h2>
+            <a href="{{ wine.get_absolute_url }}">
+                {{ wine.name }}
+            </a>
+        </h2>
+        {% if wine.picture %}
+            <img src="{{ wine.picture.url }}" alt="{{ wine.name }}" height=295.15 width=197.4>
+        {% else %}
+            <p><b>No image!</b></p>
+        {% endif %}
+        <p>description - {{ wine.description }}</p>
+        <p>producer - {{ wine.producer }}</p>
+        {% for grape in wine.grapes.all %}
+            <p>grapes - {{ grape }}</p>
+        {% empty %}
+            <p>No matching grapes were found.</p>
+        {% endfor %}
+    {% empty %}
+        <p>
+            No matching wines were found.
+        </p>
+    {% endfor %}
+{% endblock %}

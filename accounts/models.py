@@ -7,7 +7,7 @@ class Profile(models.Model):
     image = models.ImageField(upload_to='images/profiles/', blank=True)
 
     def __str__(self):
-        return self.user.get_username()
+        return f'{self.user.username} Profile'
 
     class Meta:
-        ordering = ("user", )
+        pass

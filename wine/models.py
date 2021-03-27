@@ -14,12 +14,23 @@ class Grape(models.Model):
     class Meta:
         ordering = ("name", )
 
+class Tag(models.Model):
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        pass
+
 class Wine(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
     producer = models.ForeignKey(Producer, on_delete=models.CASCADE)
     grapes = models.ManyToManyField(Grape)
     picture = models.ImageField(upload_to='images/wines/', blank=True)
+    # TODO: Retirar o blank quando se popular a BD
+    type = models.ManyToManyField(Tag, blank=True)
 
     # Sem o método 'str' aparece object no site do admin
     def __str__(self):
@@ -32,7 +43,7 @@ class Wine(models.Model):
         ordering = ("name", )
 
 class Evaluation(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="evaluations")
     wine = models.ForeignKey(Wine, on_delete=models.CASCADE, related_name="evaluations")
     description = models.TextField()
     score = models.IntegerField(
