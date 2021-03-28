@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from producer.models import Producer
+from taggit.managers import TaggableManager
 
 class Grape(models.Model):
     name = models.CharField(max_length=100)
@@ -14,14 +15,6 @@ class Grape(models.Model):
     class Meta:
         ordering = ("name", )
 
-class Tag(models.Model):
-    name = models.CharField(max_length=200)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        pass
 
 class Wine(models.Model):
     name = models.CharField(max_length=100)
@@ -30,7 +23,7 @@ class Wine(models.Model):
     grapes = models.ManyToManyField(Grape)
     picture = models.ImageField(upload_to='images/wines/', blank=True)
     # TODO: Retirar o blank quando se popular a BD
-    type = models.ManyToManyField(Tag, blank=True)
+    type = TaggableManager()
 
     # Sem o método 'str' aparece object no site do admin
     def __str__(self):
