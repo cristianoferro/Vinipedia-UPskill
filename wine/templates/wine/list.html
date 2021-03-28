@@ -8,6 +8,15 @@
     <p>{{ wine.description }}</p>
     <br />
 
+<p>Type:
+      {% for type in wine.type.all %}
+        <a href="{% url 'wine:wine_list_by_type' type.slug %}">
+          {{type.name}}
+        </a>
+      {% if not forloop.last %},{% endif %}
+      {% endfor %}
+</p>
+
 {% empty %}
 
     <p>

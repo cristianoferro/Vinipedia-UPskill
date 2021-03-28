@@ -14,6 +14,15 @@
         {% endif %}
         <p>description - {{ wine.description }}</p>
         <p>producer - {{ wine.producer }}</p>
+        {% for type in wine.type.all %}
+            <a href="{% url 'wine:wine_list_by_type' type.slug %}">
+            {{type.name}}
+        </a>
+        {% if not forloop.last %},{% endif %}
+        {% empty %}
+
+        {% endfor %}
+
         {% for grape in wine.grapes.all %}
             <p>grapes - {{ grape }}</p>
         {% empty %}

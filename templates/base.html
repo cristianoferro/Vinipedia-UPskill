@@ -10,7 +10,7 @@
 <body>
 <form class="search_box" method="GET" action="{% url 'wine:search' %}" accept-charset="UTF-8">
     {{search_form.as_p}}
-    <button type="submit" value="Submit"></button>
+    <button type="submit" value="Submit"><img src="/media/icons/search.png" /></button>
 </form>
 {% block content %}
 {% endblock %}
