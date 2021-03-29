@@ -2,7 +2,6 @@ from django import forms
 from .models import Evaluation
 
 
-#queremos gerar um formulário para comments
 class EvaluationForm(forms.ModelForm):
 
     class Meta:

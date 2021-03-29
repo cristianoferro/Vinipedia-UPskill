@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -7,7 +7,7 @@ from accounts.forms import LoginForm, UserRegistrationForm, UserEditForm, Profil
 from accounts.models import Profile
 
 
-def login(request):
+def user_login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():

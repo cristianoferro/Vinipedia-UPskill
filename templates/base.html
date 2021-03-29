@@ -1,4 +1,5 @@
 {% load static %}
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,8 +10,8 @@
 </head>
 <body>
 <form class="search_box" method="GET" action="{% url 'wine:search' %}" accept-charset="UTF-8">
-    {{search_form.as_p}}
-    <button type="submit" value="Submit"><img src="/media/icons/search.png" /></button>
+    {{search_form|crispy }}
+    <button type="submit" value="Submit"><img src="/media/icons/search.png" height="15px" /></button>
 </form>
 {% block content %}
 {% endblock %}

@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -113,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Lisbon'
 
 USE_I18N = True
 
@@ -125,8 +126,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-# NÃO ESQUECER DE VER ISTO
-
+# TODO NÃO ESQUECER DE VER ISTO
 # LOGIN_REDIRECT_URL = 'vinipedia_backend:post_list'
 # LOGIN_URL = 'accounts:login'
 # LOGOUT_URL = 'accounts:logout'
@@ -140,5 +140,6 @@ STATICFILES_DIRS = (
 )
 
 MEDIA_URL = '/media/'
-
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
