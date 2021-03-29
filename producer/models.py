@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+
 
 class Producer(models.Model):
     name = models.CharField(max_length=100)
@@ -12,7 +14,8 @@ class Producer(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return "/producer/detail/%i/" % self.id
+        return reverse('producer:producer_detail',
+                       args=[self.pk])
 
     class Meta:
         ordering = ("name",)

@@ -17,11 +17,13 @@ from django.contrib import admin
 from django.conf import settings
 from django.urls import path, include
 from django.conf.urls.static import static
+from wine.views import EvaluationList
 
 urlpatterns = [
+    path('', EvaluationList.as_view(), name='homepage'), # TODO mudar depois
     path('admin/', admin.site.urls),
-    path('', include('wine.urls')),
-    path('', include('accounts.urls')),
+    path('wines/', include('wine.urls')),
+    path('accounts/', include('accounts.urls')),
     path('producer/', include('producer.urls')),
 ]
 if settings.DEBUG:
