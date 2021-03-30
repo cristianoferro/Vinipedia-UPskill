@@ -17,6 +17,18 @@
 {% endfor %}
 <br>
 
+<p>Trending Rank</p>
+    {% if trending_rank %}
+        <p>{{ trending_rank }}</p>
+    {% else %}
+        <p>-</p>
+    {% endif %}
+<p>Score:</p>
+{% if wine.get_avg_score %}
+    {{ wine.get_avg_score.score__avg }}
+{% else %}
+    No ratings yet.
+{% endif %}
 <h1>Give us your opinion:</h1>
 
   <form method="post">
@@ -24,10 +36,12 @@
     {% csrf_token %}
     <p><input type="submit" value="Submit"></p>
   </form>
+<p>Price:</p>
+<p>{{ wine.price }}</p>
 
 <h1>Recommendations:</h1>
 
-{% for object in wine.get_similar_objects %}
+{% for object in wine.get_similar_wines %}
 
 <p><a href="{{ object.get_absolute_url }}"> {{ object }} </a></p>
 

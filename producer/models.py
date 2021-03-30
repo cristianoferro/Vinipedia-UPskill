@@ -1,6 +1,11 @@
 from django.db import models
 from django.urls import reverse
 
+class PictureAuthor(models.Model):
+    author = models.CharField(max_length=100, blank=True)
+    author_url = models.URLField(max_length=200, blank=True)
+    link_name = models.CharField(max_length=100, blank=True)
+    picture_url = models.URLField(max_length=200, unique=True, blank=True)
 
 class Producer(models.Model):
     name = models.CharField(max_length=100)
@@ -23,6 +28,7 @@ class Producer(models.Model):
 class ProducerPicture(models.Model):
     pathname = models.ImageField(upload_to='images/producers/', blank=True)
     producer = models.ForeignKey(Producer, on_delete=models.CASCADE)
+    img_author = models.OneToOneField(PictureAuthor, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.producer.name

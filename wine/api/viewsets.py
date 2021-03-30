@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from wine.models import Evaluation, Grape, Wine
-from .serializers import EvaluationSerializer, GrapeSerializer, WineSerializer
+from wine.models import Evaluation, Grape, Wine, Tag
+from .serializers import EvaluationSerializer, GrapeSerializer, WineSerializer, TagSerializer
 
 
 class EvaluationViewSet(viewsets.ModelViewSet):
@@ -16,3 +16,7 @@ class GrapeViewSet(viewsets.ModelViewSet):
 class WineViewSet(viewsets.ModelViewSet):
     queryset = Wine.objects.all()
     serializer_class = WineSerializer
+
+class TagViewSet(viewsets.ModelViewSet):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer

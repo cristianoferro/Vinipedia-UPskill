@@ -7,9 +7,15 @@
 <p><b><a href="{{ wine.get_absolute_url }}">{{ wine.name }}</a></b>, <i>{{ wine.producer }}</i></p>
     <p>{{ wine.description }}</p>
     <br />
+    <p>Trending Rank</p>
+    {% if trending_rank %}
+        <p>{{ trending_rank }}</p>
+    {% else %}
+        <p>-</p>
+    {% endif %}
 
 <p>Type:
-      {% for type in wine.type.all %}
+      {% for type in wine.types.all %}
         <a href="{% url 'wine:wine_list_by_type' type.slug %}">
           {{type.name}}
         </a>
