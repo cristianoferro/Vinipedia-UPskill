@@ -7,6 +7,7 @@ from django.db import models
 from producer.models import Producer
 from taggit.managers import TaggableManager
 
+
 class Grape(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
@@ -16,7 +17,7 @@ class Grape(models.Model):
         return self.name
 
     class Meta:
-        ordering = ("name", )
+        ordering = ("name",)
 
 
 class Wine(models.Model):
@@ -41,7 +42,8 @@ class Wine(models.Model):
         return self.type.similar_objects()
 
     class Meta:
-        ordering = ("name", )
+        ordering = ("name",)
+
 
 class Evaluation(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="evaluations")
@@ -53,4 +55,4 @@ class Evaluation(models.Model):
         validators=[MaxValueValidator(10), MinValueValidator(1)])
 
     class Meta:
-        ordering = ("-date", )
+        ordering = ("-date",)
