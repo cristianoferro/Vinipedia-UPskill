@@ -4,8 +4,8 @@ from django.views.generic import ListView, DetailView
 
 from wine.forms import EvaluationForm
 from wine.models import Wine, Evaluation
-from taggit.models import Tag
-from django.db.models import Q
+from wine.models import Tag
+from django.db.models import Q, Avg
 
 
 def search(request):
@@ -32,7 +32,7 @@ class WineList(ListView):   # (Substitui o view abaixo!)
 
             if tag:
                 # Filtrar tag ou lista
-                return get_list_or_404(Wine, type__in=[tag])
+                return get_list_or_404(Wine, types__in=[tag])
         except:
             return get_list_or_404(Wine)
 
@@ -44,6 +44,7 @@ class WineDetail(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = EvaluationForm()
+
         return context
 
     def post(self, request, pk):

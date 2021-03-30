@@ -21,7 +21,7 @@ from rest_framework import routers
 
 from accounts.api.viewsets import ProfileViewSet, UserViewSet
 from producer.api.viewsets import ProducerViewSet, ProducerPictureViewSet
-from wine.api.viewsets import EvaluationViewSet, GrapeViewSet, WineViewSet
+from wine.api.viewsets import EvaluationViewSet, GrapeViewSet, WineViewSet, TagViewSet
 
 from wine.views import EvaluationList
 
@@ -34,6 +34,7 @@ router.register(r'grapes', GrapeViewSet)
 router.register(r'producer', ProducerViewSet)
 router.register(r'producer-picture', ProducerPictureViewSet)
 router.register(r'wine', WineViewSet)
+router.register(r'tags', TagViewSet)
 
 
 urlpatterns = [
