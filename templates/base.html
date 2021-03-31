@@ -18,9 +18,13 @@
         <a class="logo" href="{% url 'homepage' %}"><img src="/media/icons/Winecense_logo.png"/></a>
         <a class="menu-page" href="{% url 'wine:wine_list' %}">Wine List</a>
     </div>
+    
     <div class="accounts-menu">
-        <a class="menu-user"></a>
-        <a class="menu-logout"></a>
+        <!-- TODO: mostrar user + logout se tiver log in -->
+        <a href=""><img src="/media/icons/user-icon.png"/></a>
+        <a href=""><img src="/media/icons/logout-icon.png"/></a>
+        <!-- ELSE -->
+        <a href="">Log in</a>
     </div>
 </nav>
 
