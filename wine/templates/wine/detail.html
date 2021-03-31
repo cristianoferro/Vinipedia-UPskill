@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
+{% load wine_tags %}
+
 <h1>Wine Detail</h1>
 
     <p><b>{{ wine.name }}</b>, <i>{{ wine.producer }}</i></p>
@@ -42,26 +44,11 @@
 <h1>Recommendations:</h1>
 
 {% for object in wine.get_similar_wines %}
-
 <p><a href="{{ object.get_absolute_url }}"> {{ object }} </a></p>
-
 {% empty %}
     <p>There are no recommendations in the DB yet.</p>
-
 {% endfor %}
 
-<h1>Evaluations:</h1>
-
-{% for evaluation in wine.evaluations.all %}
-    <p><b> {{ evaluation.user }} </b> <i> {{ evaluation.date }} </i></p>
-    <p><i> {{ evaluation.wine }} </i></p>
-    <p> {{ evaluation.score }} </p>
-    <p> {{ evaluation.description }} </p>
-    <br>
-{% empty %}
-    <p>There are no evaluations in the DB yet.</p>
-
-{% endfor %}
-    <br />
+{% show_latest_evaluations instance=wine %}
 
 {% endblock %}

@@ -44,6 +44,7 @@ class WineDetail(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = EvaluationForm()
+        self.wine_pageview()
 
         return context
 
@@ -59,6 +60,11 @@ class WineDetail(DetailView):
             context = {'wine': self.get_object(), 'form': evaluation_form}
             return render(request, self.template_name, context)
 
+    def wine_pageview(self):
+        wine = self.get_object()
+        wine.pageviews += 1
+        wine.save()
+        pass
 
 # TODO mudar para a homepage
 class EvaluationList(ListView):
