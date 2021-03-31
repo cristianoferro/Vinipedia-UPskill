@@ -48,7 +48,7 @@ class Wine(models.Model):
     grapes = models.ManyToManyField(Grape)
     picture = models.ImageField(upload_to='images/wines/', blank=True)
     img_author = models.OneToOneField(PictureAuthor, null=True, on_delete=models.SET_NULL, blank=True)
-    trending_rank = models.IntegerField(null=True, blank=True)
+    pageviews = models.IntegerField(default=0)
     price = models.CharField(max_length=255, choices=Choices(*PRICE_CHOICES), default="unknown")
     types = models.ManyToManyField(Tag, blank=True, related_name="wines")
 
