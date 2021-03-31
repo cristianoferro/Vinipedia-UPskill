@@ -44,6 +44,10 @@ nav {
   height: 6.25vh;
   background-color: white;
   border-bottom: solid #e6e7e8 1px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 50;
 }
 
 nav li {
@@ -80,7 +84,7 @@ input {
   position: relative;
   width: 37.5vw;
   height: 6.25vh;
-  margin: 6.25vh auto;
+  margin: 12.5vh auto 6.25vh auto;
 }
 /*
 

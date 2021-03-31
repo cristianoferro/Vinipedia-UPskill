@@ -1,0 +1,10 @@
+<h1>Evaluations:</h1>
+{% for evaluation in latest_evaluations %}
+        <p><b> {{ evaluation.user }} </b> <i> {{ evaluation.date }} </i></p>
+        <p><i> {{ evaluation.wine }} </i></p>
+        <p> {{ evaluation.score }} </p>
+        <p> {{ evaluation.description }} </p>
+        <br>
+    {% empty %}
+        <p>There are no evaluations in the DB yet.</p>
+{% endfor %}
