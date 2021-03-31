@@ -12,7 +12,7 @@ def search(request):
 
     query = request.GET.get("query")
     wine_query = Wine.objects.filter(
-        (Q(name__contains=query) | Q(type__name__contains=query) | Q(producer__name__contains=query))
+        (Q(name__contains=query) | Q(types__name__contains=query) | Q(producer__name__contains=query))
     )
     print('TESTING##################################################################################', wine_query)
     context = {'wines': wine_query}

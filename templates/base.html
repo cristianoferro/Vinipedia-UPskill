@@ -6,13 +6,30 @@
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
     <title>{% block title %}Wine List{% endblock %}</title>
 </head>
 <body>
+
+<nav>
+    <div class="menu">
+        <a class="logo" href="{% url 'homepage' %}"><img src="/media/icons/Winecense_logo.png"/></a>
+        <a class="menu-page" href="{% url 'wine:wine_list' %}">Wine List</a>
+    </div>
+    <div class="accounts-menu">
+        <a class="menu-user"></a>
+        <a class="menu-logout"></a>
+    </div>
+</nav>
+
 <form class="search_box" method="GET" action="{% url 'wine:search' %}" accept-charset="UTF-8">
     {{search_form|crispy }}
-    <button type="submit" value="Submit"><img src="/media/icons/search.png" height="15px" /></button>
+    <input class="search-button" type="image" src="/media/icons/search.png" value="Search">
 </form>
+
+
 {% block content %}
 {% endblock %}
 </body>
