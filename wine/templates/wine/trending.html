@@ -1,8 +1,10 @@
+{% load wine_tags %}
+
 <h1>Trending:</h1>
 
 {% for trend in trending_wines %}
 <p><a href="{{ trend.get_absolute_url }}"> {{ trend.name }} </a></p>
-
+{% show_attribution trend %}
 {% empty %}
     <p>There are no trending wines in the DB yet.</p>
 
