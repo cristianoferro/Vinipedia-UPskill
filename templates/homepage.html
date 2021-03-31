@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-
+{% load wine_tags %}
 
 <div class="banner-trending">
     <img src="/media/images/wines/big/7.jpg" />
@@ -11,22 +11,14 @@
             All over the world
         </span>
     </h1>
+    <div>
+        Photo by 
+        <a class="author" href="author_url"></a>
+         from 
+         <a class="link-name" href="picture_url"></a>
+    </div>
 </div>
 
-<p>hello world</p>
-<p>o chicambi cheira mal</p>
-
-<h1>Evaluations:</h1>
-
-{% for evaluation in evaluations.all %}
-    <p><b> {{ evaluation.user }} </b> <i> {{ evaluation.date }} </i></p>
-    <p><i> {{ evaluation.wine }} </i></p>
-    <p> {{ evaluation.score }} </p>
-    <p> {{ evaluation.description }} </p>
-    <br>
-{% empty %}
-    <p>There are no evaluations in the DB yet.</p>
-
-{% endfor %}
+{% show_latest_evaluations %}
 
 {% endblock %}
