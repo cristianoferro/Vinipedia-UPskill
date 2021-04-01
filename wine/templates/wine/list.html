@@ -1,34 +1,64 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Wine list</h1>
+{% load wine_tags %}
 
-{% for wine in wines %}
+<h1 class="list-title">Wine list</h1>
 
-<p><b><a href="{{ wine.get_absolute_url }}">{{ wine.name }}</a></b>, <i>{{ wine.producer }}</i></p>
-    <p>{{ wine.description }}</p>
-    <br />
-    <p>Trending Rank</p>
-    {% if trending_rank %}
-        <p>{{ trending_rank }}</p>
-    {% else %}
-        <p>-</p>
-    {% endif %}
+<div class="list-container">
 
-<p>Type:
-      {% for type in wine.types.all %}
-        <a href="{% url 'wine:wine_list_by_type' type.slug %}">
-          {{type.name}}
-        </a>
-      {% if not forloop.last %},{% endif %}
-      {% endfor %}
-</p>
+    {% for wine in wines %}
+    <div class="list-element">
+        {% if wine.picture %}
+            <div class="wine-bottle-image">
+                <img src="{{ wine.picture.url }}">
+                </img>
+                {% show_attribution wine %}
+            </div>
+        {% else %}
+            <p class="not-found">No image found</p>
+        {% endif %}
+            <div class="wine-contents">
 
-{% empty %}
+            
+                <p>
+                    <i>{{ wine.producer }}</i>
+                </p>
+                <p>
+                    <b><a href="{{ wine.get_absolute_url }}">{{ wine.name }}</a></b>
+                </p>
+                <p>{{ wine.description }}</p>
+                <br />
+                
+    
 
-    <p>
-        There are no wines in the DB yet.
-    </p>
+                <p>Score:</p>
+                {% if wine.get_avg_score %}
+                    {{ wine.get_avg_score.score__avg }}
+                {% else %}
+                    No ratings yet.
+                {% endif %}
 
-{% endfor %}
+                <div class="rank-contents">
 
+                    <p>Trending Rank</p>
+    
+                    {% if wine.pageviews > 0 %}
+    
+                        <p>{{ wine.trending_rank }}</p>
+    
+                    {% else %}
+    
+                        <p>-</p>
+    
+                    {% endif %}
+                </div>
+            </div>
+            
+        </div>
+        {% empty %}
+            <p>
+                There are no wines in the DB yet.
+            </p>
+    {% endfor %}
+</div>
 {% endblock %}

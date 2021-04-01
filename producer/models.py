@@ -9,6 +9,9 @@ class PictureAuthor(models.Model):
     picture_url = models.URLField(max_length=200, unique=True, blank=True)
     img_code = models.CharField(max_length=100, unique=True, blank=True)
 
+    def __str__(self):
+        return self.img_code
+
 
 class Producer(models.Model):
     name = models.CharField(max_length=100)
