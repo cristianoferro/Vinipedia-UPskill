@@ -12,13 +12,13 @@ class EvaluationSerializer(serializers.HyperlinkedModelSerializer):
 class GrapeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Grape
-        fields = '__all__'
-
+        exclude = ('img_author',)
 
 class WineSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Wine
-        fields = '__all__'
+        exclude = ('img_author',)
+
 
 class TagSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

@@ -1,73 +1,89 @@
 {% extends "base.html" %}
 {% block content %}
-{% load wine_tags %}
+    {% load wine_tags %}
 
-<h1 class="list-title">Wine list</h1>
+    <h1 class="list-title">Wine list</h1>
 
-<div class="list-container">
+    <div class="list-container">
 
-    {% for wine in wines %}
-        <div class="list-element">
-            {% if wine.picture %}
-                <div class="wine-bottle-image">
-                    <img src="{{ wine.picture.url }}">
-                    </img>
-                    {% show_attribution wine %}
-                </div>
-            {% else %}
-            
-                <div class="wine-bottle-image">
-                    <img src="/media/images/wines/vinho-test-08.png">
-                    </img>
-                    {% show_attribution wine %}
-                </div>
-                <!-- <p class="not-found">No image found</p> -->
-            {% endif %}
-            <div class="wine-contents">
-
-            
-                <p>
-                    <i>{{ wine.producer }}</i>
-                </p>
-                <p>
-                    <b><a href="{{ wine.get_absolute_url }}">{{ wine.name }}</a></b>
-                </p>
-                <p>{{ wine.description }}</p>
-                <br />
-                
-
-
-                <p>Score:</p>
-                {% if wine.get_avg_score %}
-                    {{ wine.get_avg_score.score__avg }}
+        {% for wine in wines %}
+            <div class="list-element">
+                {% if wine.picture %}
+                    <div class="wine-bottle-image">
+                        <img src="{{ wine.picture.url }}">
+                        </img>
+                        {% show_attribution wine %}
+                    </div>
                 {% else %}
-                    No ratings yet.
+
+                    <div class="wine-bottle-image">
+                        <img src="/media/images/wines/vinho-test-08.png">
+                        </img>
+                        {% show_attribution wine %}
+                    </div>
+                    <!-- <p class="not-found">No image found</p> -->
                 {% endif %}
+                <div class="wine-contents">
 
-                <div class="rank-contents">
 
-                    
-                    <p class="rank"><img src="/media/icons/rank.png" />Rank</p>
-                    <div class="rank-separator"></div>
-                    {% if wine.pageviews > 0 %}
+                    <p>
+                        <i>{{ wine.producer }}</i>
+                    </p>
+                    <p>
+                        <b><a href="{{ wine.get_absolute_url }}">{{ wine.name }}</a></b>
+                    </p>
+                    <p>{{ wine.description }}</p>
+                    <br/>
 
-                        <p><span class="rank-nr">Nº {{ wine.trending_rank }}
+
+                    <p>Score:</p>
+                    {% if wine.get_avg_score %}
+                        {{ wine.get_avg_score.score__avg }}
+                    {% else %}
+                        No ratings yet.
+                    {% endif %}
+
+                    <div class="rank-contents">
+
+
+                        <p class="rank"><img src="/media/icons/rank.png"/>Rank</p>
+                        <div class="rank-separator"></div>
+                        {% if wine.pageviews > 0 %}
+
+                            <p><span class="rank-nr">Nº {{ wine.trending_rank }}
 
                         </span> Trending</p>
 
-                    {% else %}
+                        {% else %}
 
-                        <p>Not ranked</p>
+                            <p>Not ranked</p>
 
-                    {% endif %}
+                        {% endif %}
+                    </div>
                 </div>
+                <div class="darker-background"></div>
             </div>
-            <div class="darker-background"></div>
-        </div>
-    {% empty %}
-        <p>
-            There are no wines in the DB yet.
-        </p>
-    {% endfor %}
-</div>
+        {% empty %}
+            <p>
+                There are no wines in the DB yet.
+            </p>
+        {% endfor %}
+    </div>
+    <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+    </div>
 {% endblock %}

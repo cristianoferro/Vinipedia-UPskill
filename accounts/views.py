@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from accounts.forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditForm
 from accounts.models import Profile
 
@@ -18,7 +18,7 @@ def user_login(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return HttpResponse('Authenticated successfully')
+                    return redirect('homepage')
                 else:
                     return HttpResponse('Disabled account')
             else:
@@ -64,6 +64,7 @@ def edit(request):
             user_form.save()
             profile_form.save()
             messages.success(request, 'Profile updated successfully')
+            return redirect('accounts:profile')
         else:
             messages.error(request, 'Error updating your profile.html')
     else:
@@ -75,10 +76,8 @@ def edit(request):
                    'profile_form': profile_form})
 
 
-# @login_required
-# def favorites(request):
-#     profile = get_object_or_404(Profile).filter(user=request.user)
-#
-#     return render(request,
-#                   'accounts/favorites.html',
-#                   {'profile': profile})
+@login_required
+def profile(request):
+    return render(request,
+                  'accounts/profile.html',
+                  {'profile': request.user.profile})

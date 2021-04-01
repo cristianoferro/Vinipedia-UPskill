@@ -9,7 +9,6 @@ from django.db.models import Q, Avg
 
 
 def search(request):
-
     query = request.GET.get("query")
     wine_query = Wine.objects.filter(
         (Q(name__contains=query) | Q(types__name__contains=query) | Q(producer__name__contains=query))
@@ -21,11 +20,12 @@ def search(request):
                   context)
 
 
-
-class WineList(ListView):   # (Substitui o view abaixo!)
+class WineList(ListView):  # (Substitui o view abaixo!)
     template_name = 'wine/list.html'
-    context_object_name = 'wines'   # (Alterar nome do contexto para ser usado no template)
+    context_object_name = 'wines'  # (Alterar nome do contexto para ser usado no template)
     model = Wine
+    paginate_by = 2 # todo: mudar o nr
+
     def get_queryset(self):
         try:
             tag = get_object_or_404(Tag, slug=self.kwargs.get('tag_slug'))
@@ -66,6 +66,7 @@ class WineDetail(DetailView):
         wine.pageviews += 1
         wine.save()
         pass
+
 
 # TODO mudar para a homepage
 class EvaluationList(ListView):

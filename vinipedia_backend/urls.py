@@ -18,6 +18,7 @@ from django.conf import settings
 from django.urls import path, include
 from django.conf.urls.static import static
 from rest_framework import routers
+from rest_framework.authtoken.views import obtain_auth_token
 
 from accounts.api.viewsets import ProfileViewSet, UserViewSet
 from producer.api.viewsets import ProducerViewSet, ProducerPictureViewSet
@@ -25,29 +26,32 @@ from wine.api.viewsets import EvaluationViewSet, GrapeViewSet, WineViewSet, TagV
 
 from wine.views import EvaluationList
 
-
 router = routers.DefaultRouter()
 router.register(r'accounts', UserViewSet)
-router.register(r'accounts-profile', ProfileViewSet)
+router.register(r'accounts-profiles', ProfileViewSet)
 router.register(r'evaluations', EvaluationViewSet)
 router.register(r'grapes', GrapeViewSet)
-router.register(r'producer', ProducerViewSet)
-router.register(r'producer-picture', ProducerPictureViewSet)
-router.register(r'wine', WineViewSet)
+router.register(r'producers', ProducerViewSet)
+router.register(r'producers-pictures', ProducerPictureViewSet)
+router.register(r'wines', WineViewSet)
 router.register(r'tags', TagViewSet)
 
+apipatterns = [
+    # API paths
+    path('', include(router.urls)),
+    # TODO (Authentication):  path('api-auth', include('rest_framework.urls'))
+    path('api-token-auth/', obtain_auth_token),
+]
 
 urlpatterns = [
-    path('', EvaluationList.as_view(), name='homepage'), # TODO mudar depois
+    path('', EvaluationList.as_view(), name='homepage'),  # TODO mudar depois
     path('admin/', admin.site.urls),
     path('wines/', include('wine.urls')),
     path('accounts/', include('accounts.urls')),
     path('producer/', include('producer.urls')),
-
-    # API paths
-    path('api/', include(router.urls)),
-    # TODO (Authentication):  path('api-auth', include('rest_framework.urls'))
+    path('api/', include(apipatterns)),
 ]
+
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)

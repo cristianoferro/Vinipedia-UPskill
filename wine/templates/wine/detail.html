@@ -1,65 +1,71 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-{% load wine_tags %}
+    {% load wine_tags %}
 
-<h1>Wine Detail</h1>
+    <h1>Wine Detail</h1>
     {% show_attribution wine %}
     <p><b>{{ wine.name }}</b>, <i>{{ wine.producer }}</i></p>
     <p>{{ wine.description }}</p>
     {% if wine.picture %}
-        <img src="{{ wine.picture.url}}" alt="{{ wine.name }}">
+        <img src="{{ wine.picture.url }}" alt="{{ wine.name }}">
     {% else %}
         <p>no image</p>
     {% endif %}
-{% for grape in wine.grapes.all %}
-    <h3>{{ grape.name }}</h3>
-    <p>{{ grape.description }}</p>
-    <img src={{ grape.picture.url }} alt={{ grape.name }}/>
-{% endfor %}
-<br>
+    {% for grape in wine.grapes.all %}
+        <h3>{{ grape.name }}</h3>
+        <p>{{ grape.description }}</p>
+        <img src={{ grape.picture.url }} alt={{ grape.name }}/>
+    {% endfor %}
+    <br>
 
-<p>Trending Rank</p>
+    <p>Trending Rank</p>
     {% if trending_rank %}
         <p>{{ trending_rank }}</p>
     {% else %}
         <p>-</p>
     {% endif %}
-<p>Score:</p>
-{% if wine.get_avg_score %}
-    {{ wine.get_avg_score.score__avg }}
-{% else %}
-    No ratings yet.
-{% endif %}
+    <p>Score:</p>
+    {% if wine.get_avg_score %}
+        {{ wine.get_avg_score.score__avg }}
+    {% else %}
+        No ratings yet.
+    {% endif %}
 
 
-<p>Type:
-    {% for type in wine.types.all %}
-        <a href="{% url 'wine:wine_list_by_type' type.slug %}">
-        {{type.name}}
-        </a>
-    {% if not forloop.last %},{% endif %}
+    <p>Type:
+        {% for type in wine.types.all %}
+            <a href="{% url 'wine:wine_list_by_type' type.slug %}">
+                {{ type.name }}
+            </a>
+            {% if not forloop.last %},{% endif %}
+        {% endfor %}
+    </p>
+
+    <h1>Give us your opinion:</h1>
+
+    {% if request.user.is_authenticated %}
+        <form method="post">
+            {{ form|crispy }}
+            {% csrf_token %}
+            <p><input type="submit" value="Submit"></p>
+        </form>
+    {% else %}
+        <p><a href="{% url 'accounts:login' %}"> Login HERE!! </a></p>
+    {% endif %}
+
+    <br/>
+    <p>Price:</p>
+    <p>{{ wine.price }}</p>
+
+    <h1>Recommendations:</h1>
+
+    {% for object in wine.get_similar_wines %}
+        <p><a href="{{ object.get_absolute_url }}"> {{ object }} </a></p>
+    {% empty %}
+        <p>There are no recommendations in the DB yet.</p>
     {% endfor %}
-</p>
 
-<h1>Give us your opinion:</h1>
-
-  <form method="post">
-    {{ form|crispy }}
-    {% csrf_token %}
-    <p><input type="submit" value="Submit"></p>
-  </form>
-<p>Price:</p>
-<p>{{ wine.price }}</p>
-
-<h1>Recommendations:</h1>
-
-{% for object in wine.get_similar_wines %}
-<p><a href="{{ object.get_absolute_url }}"> {{ object }} </a></p>
-{% empty %}
-    <p>There are no recommendations in the DB yet.</p>
-{% endfor %}
-
-{% show_latest_evaluations instance=wine %}
+    {% show_latest_evaluations instance=wine %}
 
 {% endblock %}

@@ -12,4 +12,4 @@ class ProducerSerializer(serializers.HyperlinkedModelSerializer):
 class ProducerPictureSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = ProducerPicture
-        fields = '__all__'
+        fields = ('pathname', 'producer')

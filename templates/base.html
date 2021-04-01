@@ -18,18 +18,21 @@
         <a class="logo" href="{% url 'homepage' %}"><img src="/media/icons/Winecense_logo.png"/></a>
         <a class="menu-page" href="{% url 'wine:wine_list' %}">All Wines</a>
     </div>
-    
+
     <div class="accounts-menu">
         <!-- TODO: mostrar user + logout se tiver log in -->
-        <a href=""><img src="/media/icons/user-icon.png"/></a>
-        <a href=""><img src="/media/icons/logout-icon.png"/></a>
-        <!-- ELSE -->
-        <a href="">Log in</a>
+        {% if request.user.is_authenticated %}
+            <a href="{% url 'accounts:profile' %}"><img src="/media/icons/user-icon.png"/></a>
+            <a href="{% url 'accounts:logout' %}"><img src="/media/icons/logout-icon.png"/></a>
+            <!-- ELSE -->
+        {% else %}
+            <a href="{% url 'accounts:login' %}">Log in</a>
+        {% endif %}
     </div>
 </nav>
 
 <form class="search_box" method="GET" action="{% url 'wine:search' %}" accept-charset="UTF-8">
-    {{search_form|crispy }}
+    {{ search_form|crispy }}
     <input class="search-button" type="image" src="/media/icons/search.png" value="Search">
 </form>
 

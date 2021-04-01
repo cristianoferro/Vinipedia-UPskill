@@ -1,4 +1,6 @@
 from rest_framework import viewsets
+from rest_framework.pagination import PageNumberPagination, LimitOffsetPagination
+
 from wine.models import Evaluation, Grape, Wine, Tag
 from .serializers import EvaluationSerializer, GrapeSerializer, WineSerializer, TagSerializer
 
@@ -16,6 +18,7 @@ class GrapeViewSet(viewsets.ModelViewSet):
 class WineViewSet(viewsets.ModelViewSet):
     queryset = Wine.objects.all()
     serializer_class = WineSerializer
+
 
 class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all()

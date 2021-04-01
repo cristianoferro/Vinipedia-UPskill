@@ -75,6 +75,7 @@ class Wine(models.Model):
         return Wine.objects(grapes__in=self.grapes.all()).exclude(pk=self.pk)
 
     def get_avg_score(self):
+        """Calculate the average scores given in all evaluations"""
         return self.evaluations.aggregate(Avg('score'))
 
     def trending_rank(self):
