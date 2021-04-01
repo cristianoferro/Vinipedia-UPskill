@@ -36,6 +36,7 @@ class WineList(ListView):   # (Substitui o view abaixo!)
         except:
             return get_list_or_404(Wine)
 
+
 class WineDetail(DetailView):
     template_name = 'wine/detail.html'
     context_object_name = 'wine'

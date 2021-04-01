@@ -71,13 +71,16 @@ class Wine(models.Model):
         #     wines.append(type.get_similar_objs())
         return Wine.objects.filter(types__in=self.types.all()).exclude(pk=self.pk)
 
+    def get_wines_by_grape(self):
+        return Wine.objects(grapes__in=self.grapes.all()).exclude(pk=self.pk)
+
     def get_avg_score(self):
         return self.evaluations.aggregate(Avg('score'))
 
     def trending_rank(self):
         aggregate = Wine.objects.filter(
-            pageviews__gte=self.pageviews).aggregate(trending_rank=Count('pageviews'))
-        return aggregate['trending_rank']
+            pageviews__gt=self.pageviews).aggregate(trending_rank=Count('pageviews'))
+        return aggregate['trending_rank']+1
 
     class Meta:
         ordering = ("name",)
