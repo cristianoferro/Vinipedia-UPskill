@@ -7,16 +7,22 @@
 <div class="list-container">
 
     {% for wine in wines %}
-    <div class="list-element">
-        {% if wine.picture %}
-            <div class="wine-bottle-image">
-                <img src="{{ wine.picture.url }}">
-                </img>
-                {% show_attribution wine %}
-            </div>
-        {% else %}
-            <p class="not-found">No image found</p>
-        {% endif %}
+        <div class="list-element">
+            {% if wine.picture %}
+                <div class="wine-bottle-image">
+                    <img src="{{ wine.picture.url }}">
+                    </img>
+                    {% show_attribution wine %}
+                </div>
+            {% else %}
+            
+                <div class="wine-bottle-image">
+                    <img src="/media/images/wines/vinho-test-08.png">
+                    </img>
+                    {% show_attribution wine %}
+                </div>
+                <!-- <p class="not-found">No image found</p> -->
+            {% endif %}
             <div class="wine-contents">
 
             
@@ -29,7 +35,7 @@
                 <p>{{ wine.description }}</p>
                 <br />
                 
-    
+
 
                 <p>Score:</p>
                 {% if wine.get_avg_score %}
@@ -40,25 +46,28 @@
 
                 <div class="rank-contents">
 
-                    <p>Trending Rank</p>
-    
+                    
+                    <p class="rank"><img src="/media/icons/rank.png" />Rank</p>
+                    <div class="rank-separator"></div>
                     {% if wine.pageviews > 0 %}
-    
-                        <p>{{ wine.trending_rank }}</p>
-    
+
+                        <p><span class="rank-nr">Nº {{ wine.trending_rank }}
+
+                        </span> Trending</p>
+
                     {% else %}
-    
-                        <p>-</p>
-    
+
+                        <p>Not ranked</p>
+
                     {% endif %}
                 </div>
             </div>
-            
+            <div class="darker-background"></div>
         </div>
-        {% empty %}
-            <p>
-                There are no wines in the DB yet.
-            </p>
+    {% empty %}
+        <p>
+            There are no wines in the DB yet.
+        </p>
     {% endfor %}
 </div>
 {% endblock %}

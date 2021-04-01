@@ -187,7 +187,7 @@ input {
   min-width: 25vw;
   align-items: center;
   margin: 0 0.2rem 0 0;
-  background-color: #ffffff99;
+  background-color: #ffffffdd;
   height: 1.5rem;
   border-radius: 0.75rem;
   padding: 0 0.5rem;
@@ -202,7 +202,7 @@ input {
 }
 
 .list-title {
-  margin: 0 12.5vw;
+  margin: 0 12.5vw 6.75vh 12.5vw;
 }
 
 .list-element {
@@ -211,6 +211,9 @@ input {
   flex-direction: column;
   position: relative;
   height: 16rem;
+  border-right: 0.1rem solid white;
+  box-sizing: border-box;
+  margin: 2vh 0;
 }
 .wine-bottle-image {
   position: relative;
@@ -226,6 +229,7 @@ input {
   height: 100%;
   align-content: center;
   object-fit: cover;
+  z-index: 1;
 }
 .wine-contents {
   display: flex;
@@ -234,7 +238,6 @@ input {
   justify-content: flex-end;
   margin-left: 40%;
   z-index: 10;
-  background-color: #e6e7e8;
   height: 100%;
 }
 .producer-name {
@@ -252,17 +255,42 @@ input {
 .rank-contents {
   display: flex;
   flex-direction: column;
-  background-color: #e6e7e8;
   justify-content: flex-end;
   height: 100%;
+  color: #e6e7e8;
+  padding-bottom: 10%;
 }
 .rank {
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
-.rank-position {
+.rank img {
+  width: 22%;
+  margin-right: 5%;
+}
+
+.rank-nr {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.rank-separator {
+  width: 90%;
+  height: 0.1rem;
+  background-color: white;
 }
 
 .rank-type {
+}
+
+.darker-background {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  height: 40%;
+  width: 100%;
+  background-color: #58595b;
 }
 
 /**************************** Detail View *****************************/
