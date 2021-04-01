@@ -16,5 +16,5 @@ class ProducerPictureAdmin(admin.ModelAdmin):
 
 @admin.register(PictureAuthor)
 class PictureAuthorAdmin(admin.ModelAdmin):
-    list_display = ('author', 'picture_url')
+    list_display = ('author', 'img_code', 'picture_url')
     list_filter = ('author',)

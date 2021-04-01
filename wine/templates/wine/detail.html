@@ -4,7 +4,7 @@
 {% load wine_tags %}
 
 <h1>Wine Detail</h1>
-
+    {% show_attribution wine %}
     <p><b>{{ wine.name }}</b>, <i>{{ wine.producer }}</i></p>
     <p>{{ wine.description }}</p>
     {% if wine.picture %}
@@ -31,6 +31,17 @@
 {% else %}
     No ratings yet.
 {% endif %}
+
+
+<p>Type:
+    {% for type in wine.types.all %}
+        <a href="{% url 'wine:wine_list_by_type' type.slug %}">
+        {{type.name}}
+        </a>
+    {% if not forloop.last %},{% endif %}
+    {% endfor %}
+</p>
+
 <h1>Give us your opinion:</h1>
 
   <form method="post">

@@ -1,9 +1,9 @@
 <div class="attribution">
     <div class="attribution-detail">
         <div class="attribution-hidden">
-            <p>Photo by <a class="author" href="{{ picture_author.author_url }}"> {{ picture_author.author }} </a>
+            <p>Photo by <a class="author" href="{{ picture_author.author_url }}"> {{ picture_author.author|capfirst }} </a>
             from 
-            <a class="link-name" href="{{ picture_author.picture_url }}"> {{ picture_author.link_name }} </a></p>
+            <a class="link-name" href="{{ picture_author.picture_url }}"> {{ picture_author.link_name|capfirst }} </a></p>
         </div>
         <div class="attribution-icon">i</div>
     </div>
