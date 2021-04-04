@@ -1,0 +1,156 @@
+body {
+  font-family: "Montserrat", sans-serif;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 700;
+  color: #58595b;
+}
+
+a {
+  color: #58595b;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+a:hover {
+  text-shadow: 0 0.1em 0.2em #ba3f1d7c;
+  transition: 0.15s;
+}
+
+p {
+  margin: 0;
+}
+
+.not-found {
+  font-size: 0.5rem;
+}
+
+.menu {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  padding: 0 3.125vw;
+}
+
+.menu img {
+  height: 100%;
+}
+
+.logo {
+  height: 100%;
+  max-height: 50%;
+}
+
+.menu-page {
+  margin-left: 3.125vw;
+}
+
+.accounts-menu {
+  height: 100%;
+  display: flex;
+  width: 50%;
+  align-items: center;
+  padding: 0 3.125vw 0 0;
+  justify-content: flex-end;
+}
+
+.accounts-menu img {
+  height: 50%;
+}
+
+.accounts-menu a {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin-right: 3.125vw;
+}
+
+nav {
+  height: 6.25vh;
+  background-color: white;
+  border-bottom: solid #e6e7e8 1px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 50;
+  display: flex;
+}
+
+nav li {
+  margin-top: 0.5rem;
+}
+
+.search_box input {
+  float: none;
+}
+
+input[type="image" i] {
+  position: absolute;
+  width: 1.5vw;
+  border-radius: 1vw;
+  padding: 0.2rem;
+  left: 1vw;
+  bottom: 0.4rem;
+}
+
+button,
+input {
+  outline: none;
+}
+
+.search_box input[type="text"] {
+  background: white;
+  width: -webkit-fill-available;
+  border: 0.1rem solid #58595b;
+  height: 6.25vh;
+  border-radius: 3rem;
+  padding-left: 3vw;
+}
+
+.search_box {
+  background-color: #f9f9f9;
+  position: relative;
+  width: 37.5vw;
+  height: 6.25vh;
+  margin: 12.5vh auto 6.25vh auto;
+}
+
+/**************************** Homepage *****************************/
+
+.banner-trending {
+  height: 37.5vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.banner-trending img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+}
+
+.trending-message {
+  z-index: 1;
+  font-weight: 400;
+  width: 100%;
+  padding: 0 12.5vw;
+  background-color: rgb(255, 255, 255, 0.7);
+  height: 12.5vh;
+  font-size: 1.5rem;
+  color: #58595b;
+  display: flex;
+  align-items: center;
+}
