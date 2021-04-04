@@ -1,8 +1,12 @@
 from rest_framework import viewsets
 
-from producer.api.serializers import ProducerSerializer, ProducerPictureSerializer
-from producer.models import Producer, ProducerPicture
+from producer.api.serializers import ProducerSerializer, ProducerPictureSerializer, PictureAuthorSerializer
+from producer.models import PictureAuthor, Producer, ProducerPicture
 
+
+class PictureAuthorViewSet(viewsets.ModelViewSet):
+    queryset = PictureAuthor.objects.all()
+    serializer_class = PictureAuthorSerializer
 
 class ProducerViewSet(viewsets.ModelViewSet):
     queryset = Producer.objects.all()
@@ -12,3 +16,4 @@ class ProducerViewSet(viewsets.ModelViewSet):
 class ProducerPictureViewSet(viewsets.ModelViewSet):
     queryset = ProducerPicture.objects.all()
     serializer_class = ProducerPictureSerializer
+

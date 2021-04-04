@@ -1,7 +1,11 @@
 from rest_framework import serializers
 
-from producer.models import Producer, ProducerPicture
+from producer.models import PictureAuthor, Producer, ProducerPicture
 
+class PictureAuthorSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = PictureAuthor
+        fields = '__all__'
 
 class ProducerSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -12,4 +16,4 @@ class ProducerSerializer(serializers.HyperlinkedModelSerializer):
 class ProducerPictureSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = ProducerPicture
-        fields = ('pathname', 'producer')
+        fields = '__all__'

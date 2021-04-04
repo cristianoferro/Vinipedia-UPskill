@@ -21,7 +21,7 @@ from rest_framework import routers
 from rest_framework.authtoken.views import obtain_auth_token
 
 from accounts.api.viewsets import ProfileViewSet, UserViewSet
-from producer.api.viewsets import ProducerViewSet, ProducerPictureViewSet
+from producer.api.viewsets import PictureAuthorViewSet, ProducerViewSet, ProducerPictureViewSet
 from wine.api.viewsets import EvaluationViewSet, GrapeViewSet, WineViewSet, TagViewSet
 
 from wine.views import EvaluationList
@@ -31,6 +31,7 @@ router.register(r'accounts', UserViewSet)
 router.register(r'accounts-profiles', ProfileViewSet)
 router.register(r'evaluations', EvaluationViewSet)
 router.register(r'grapes', GrapeViewSet)
+router.register(r'picture-author-viewSet', PictureAuthorViewSet)
 router.register(r'producers', ProducerViewSet)
 router.register(r'producers-pictures', ProducerPictureViewSet)
 router.register(r'wines', WineViewSet)
