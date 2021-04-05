@@ -2,7 +2,8 @@
 {% block content %}
     {% load wine_tags %}
 
-    <h1 class="list-title">Wine list</h1>
+    <h1 class="list-title">All Wines Listed</h1>
+
 
     <div class="list-container">
 
@@ -69,21 +70,29 @@
             </p>
         {% endfor %}
     </div>
-    <div class="pagination">
-    <span class="step-links">
-        {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-        {% endif %}
+    <div class="container">
+        <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
 
-        <span class="current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+            <p class="next">
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            </p>
+            {% endif %}
         </span>
+        </div>
 
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-        {% endif %}
-    </span>
     </div>
+
+        <p class="visitas">Lista visitada {{ request.session.visitas_wine_list }} vezes</p>
+    <hr/>
 {% endblock %}
