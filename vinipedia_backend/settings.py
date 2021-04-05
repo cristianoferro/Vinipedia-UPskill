@@ -109,11 +109,14 @@ WSGI_APPLICATION = 'vinipedia_backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd63l3gngqdouif',
+        'USER': 'nqofiglkvurrnt',
+        'PASSWORD': 'd564f75123ab111b9a644eefb52ff1540c65338bf6926f21880c1f0495a65835',
+        'HOST': 'ec2-54-155-87-214.eu-west-1.compute.amazonaws.com',
+        'PORT': '5432',
     }
 }
-
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
