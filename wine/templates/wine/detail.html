@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    {% load wine_tags %}
+{% load wine_tags %}
 
+<div class="container">
     <h1>Wine Detail</h1>
     {% show_attribution wine %}
     <p><b>{{ wine.name }}</b>, <i>{{ wine.producer }}</i></p>
@@ -18,6 +19,11 @@
         <img src={{ grape.picture.url }} alt={{ grape.name }}/>
     {% endfor %}
     <br>
+
+    <div>
+        <h2>Visitas:</h2>
+        {{ request.session.num_visitas }}
+    </div>
 
     <p>Trending Rank</p>
     {% if trending_rank %}
@@ -68,4 +74,5 @@
 
     {% show_latest_evaluations instance=wine %}
 
+</div>
 {% endblock %}

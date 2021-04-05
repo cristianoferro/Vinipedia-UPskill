@@ -1,10 +1,16 @@
- <h1>Evaluations:</h1>
+
 {% for evaluation in latest_evaluations %}
-        <p><b> {{ evaluation.user }} </b> <i> {{ evaluation.date }} </i></p>
-        <p><i> {{ evaluation.wine }} </i></p>
-        <p> {{ evaluation.score }} </p>
-        <p> {{ evaluation.description }} </p>
+<div class="list-element">
+
+        <p>
+            <b>{{ evaluation.score }}</b>/5 - <b><a href="{{ evaluation.wine.get_absolute_url }}">{{ evaluation.wine }}</a></b>
+        </p>
+
+        <p class="evaluation-user">By <b> {{ evaluation.user }} </b> on <i> {{ evaluation.date }} </i></p>
+        <hr>
+        <p> {{ evaluation.description|truncatechars:48 }} </p>
         <br>
+</div>
     {% empty %}
         <p>There are no evaluations in the DB yet.</p>
 {% endfor %}
