@@ -34,10 +34,6 @@ class Tag(models.Model):
     class Meta:
         ordering = ("name",)
 
-    def get_similar_objs(self):
-        return self.wines.all()
-
-
 class Wine(models.Model):
     PRICE_CHOICES = (
         ('unknown', 'Unknown'),
@@ -66,9 +62,6 @@ class Wine(models.Model):
                        args=[self.pk])
 
     def get_similar_wines(self):
-        # wines = []
-        # for type in self.types.all():
-        #     wines.append(type.get_similar_objs())
         return Wine.objects.filter(types__in=self.types.all()).exclude(pk=self.pk)
 
     def get_wines_by_grape(self):
