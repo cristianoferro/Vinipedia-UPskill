@@ -7,7 +7,6 @@ from wine.models import Wine, Evaluation
 from wine.models import Tag
 from django.db.models import Q, Avg
 
-
 def search(request):
     query = request.GET.get("query")
     wine_query = Wine.objects.filter(
@@ -26,6 +25,16 @@ class WineList(ListView):  # (Substitui o view abaixo!)
     model = Wine
     paginate_by = 2 # todo: mudar o nr
 
+    def get_context_data(self, **kwargs):
+        context = super(WineList, self).get_context_data(**kwargs)
+
+        num_visitas = self.request.session.get("visitas_wine_list", 0)
+        num_visitas += 1
+
+        self.request.session["visitas_wine_list"] = num_visitas
+
+        return context
+
     def get_queryset(self):
         try:
             tag = get_object_or_404(Tag, slug=self.kwargs.get('tag_slug'))
@@ -41,6 +50,7 @@ class WineDetail(DetailView):
     template_name = 'wine/detail.html'
     context_object_name = 'wine'
     model = Wine
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -58,6 +68,7 @@ class WineDetail(DetailView):
             evaluation_form.save()
             return redirect(self.get_object())
         else:
+
             context = {'wine': self.get_object(), 'form': evaluation_form}
             return render(request, self.template_name, context)
 
@@ -70,6 +81,11 @@ class WineDetail(DetailView):
 
 # TODO mudar para a homepage
 class EvaluationList(ListView):
+    model = Evaluation
+    template_name = 'homepage.html'
+    context_object_name = 'evaluations'
+
+class Homepage(ListView):
     model = Evaluation
     template_name = 'homepage.html'
     context_object_name = 'evaluations'

@@ -23,7 +23,13 @@
     </div>
 </div>
 
-{% show_latest_evaluations %}
-{% get_trending_wines %}
+<h1 class="list-title">Latest evaluations</h1>
+<div class="list-container evaluations">
+    {% show_latest_evaluations 4 %}
+</div>
 
+<h1 class="list-title">Trending Wines</h1>
+<div class="list-container">
+    {% get_trending_wines %}
+</div>
 {% endblock %}

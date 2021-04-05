@@ -111,7 +111,6 @@ input {
   padding-left: 3vw;
 }
 .search_box {
-  background-color: #f9f9f9;
   position: relative;
   width: 37.5vw;
   height: 6.25vh;
@@ -195,6 +194,10 @@ input {
 
 /**************************** Lists and groups of elements *****************************/
 
+.container {
+  margin: 0 12.5vw;
+}
+
 .list-container {
   margin: 0 12.5vw;
   display: flex;
@@ -202,7 +205,7 @@ input {
 }
 
 .list-title {
-  margin: 0 12.5vw 6.75vh 12.5vw;
+  margin: 6.25vh 12.5vw 1.5vh 12.5vw;
 }
 
 .list-element {
@@ -291,6 +294,43 @@ input {
   height: 40%;
   width: 100%;
   background-color: #58595b;
+}
+
+.pagination{
+  margin: 0 12.5vw;
+  position: absolute;
+  right: 0;
+}
+.next{
+
+}
+.visitas{
+  margin: 6.25vh 12.5vw 1.5vh 12.5vw;
+}
+
+.evaluations .list-element {
+  height: 8rem;
+}
+.list-element .date{
+  color:grey;
+}
+.score{
+
+}
+
+.evaluations .list-element{
+  padding:1vw;
+  margin-right:2%;
+  border-radius:1vw;
+  background-color: #fafafa;
+  width:23.5%;
+}
+.evaluations .list-element:last-child{
+  margin-right:0;
+}
+
+.evaluation-user{
+  font-size:0.75rem;
 }
 
 /**************************** Detail View *****************************/
