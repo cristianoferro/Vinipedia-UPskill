@@ -41,8 +41,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'django_filters',
-    # TODO: eliminar módulo
-    'taggit',
     'producer',
     'wine',
 ]
