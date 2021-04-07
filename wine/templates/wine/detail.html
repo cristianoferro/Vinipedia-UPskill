@@ -4,75 +4,125 @@
 {% load wine_tags %}
 
 <div class="container">
-    <h1>Wine Detail</h1>
-    {% show_attribution wine %}
-    <p><b>{{ wine.name }}</b>, <i>{{ wine.producer }}</i></p>
-    <p>{{ wine.description }}</p>
-    {% if wine.picture %}
-        <img src="{{ wine.picture.url }}" alt="{{ wine.name }}">
-    {% else %}
-        <p>no image</p>
-    {% endif %}
-    {% for grape in wine.grapes.all %}
-        <h3>{{ grape.name }}</h3>
-        <p>{{ grape.description }}</p>
-        <img src={{ grape.picture.url }} alt={{ grape.name }}/>
-    {% endfor %}
-    <br>
 
-    <div>
-        <h2>Visitas:</h2>
-        {{ request.session.num_visitas }}
+    <div class="wine-info">
+        <div class="detail-container-left">
+            <div class="img-detail-container">
+            {% if wine.picture %}
+                <img src="{{ wine.picture.url }}" alt="{{ wine.name }}"/>
+                {% show_attribution wine %}
+            {% else %}
+                <img src="/media/images/wines/vinho-test-08.png"/>
+                {% show_attribution wine %}
+            {% endif %}
+            </div>
+            <div class="rank-contents">
+                <p class="rank"><img src="/media/icons/rank.png"/>Rank</p>
+                <div class="rank-separator"></div>
+
+                {% if wine.pageviews > 0 %}
+
+                    <p><span class="rank-nr">Nº
+                        {% if wine.trending_rank %}
+                            {{ wine.trending_rank|subtract:1 }}
+                        {% else %}
+                            -
+                        {% endif %}
+                </span> Trending</p>
+
+                {% else %}
+                    <p>Not ranked</p>
+                {% endif %}
+            </div>
+
+        <div class="darker-background"></div>
+        </div>
+
+
+        <div class="detail-container-right">
+            <h2 class="producer-title"><i>{{ wine.producer|title }}</i></h2>
+            <h1 class="detail-title">{{ wine.name|title }}</h1>
+
+            {% for type in wine.types.all %}
+                    <a class="wine-type" href="{% url 'wine:wine_list_by_type' type.slug %}">
+                        {{ type.name }}
+                    </a>
+                    {% if not forloop.last %}&nbsp;{% endif %}
+            {% endfor %}
+            <p class="detail-description">{{ wine.description }}</p>
+            <h3 class="grapes-title">Grapes</h3>
+            <div class="grape-list">
+            {% for grape in wine.grapes.all %}
+                <div class="grape">
+                    <div class="grape-image">
+                        {% if grape.picture %}
+                            <img src={{ grape.picture.url }} alt={{ grape.name }}/>
+                            {% show_attribution grape %}
+                        {% endif %}
+                    </div>
+                    <div class="grape-info">
+                        <h3>{{ grape.name|title }}</h3>
+                        <p>{{ grape.description }}</p>
+                    </div>
+                </div>
+            {% empty %}
+                <div>No related grapes registered</div>
+            {% endfor %}
+            </div>
+
+        </div>
+    </div>
+    <div class="wine-info">
+        <div class="detail-container-left">
+            <div class="wine-stats">
+                <div class="ratings-detail">
+                    <div class="score-detail">
+                        {% if wine.get_avg_score %}
+                            <b>{{ wine.get_avg_score.score__avg }}</b>/5
+                        {% else %}
+                            No ratings yet.
+                        {% endif %}
+                    </div>
+
+                    {% with wine.evaluations.count as total_ratings %}
+                      <div class="ratings-count">
+                          {{ total_ratings }} rating{{ wine.evaluations.count|pluralize }}
+                      </div>
+                    {% endwith %}
+                </div>
+                <div class="wine-views">
+                    {{ wine.pageviews }}
+                    <img src="/media/icons/view-icon.png"/>
+                </div>
+            </div>
+            <h3>Evaluate this wine</h3>
+                {% if request.user.is_authenticated %}
+                    <form method="post">
+                        {{ form|crispy }}
+                        {% csrf_token %}
+                        <p><input type="submit" value="Submit"></p>
+                    </form>
+                {% else %}
+                    <p><a href="{% url 'accounts:login' %}"> Login HERE!! </a></p>
+                {% endif %}
+        </div>
+        <div class="detail-container-right">
+            <h3>Similar Recommendations</h3>
+
+            {% for object in wine.get_similar_wines|slice:":4" %}
+                <p><a href="{{ object.get_absolute_url }}"> {{ object }} </a></p>
+            {% empty %}
+                <p>There are no recommendations in the DB yet.</p>
+            {% endfor %}
+        </div>
     </div>
 
-    <p>Trending Rank</p>
-    {% if trending_rank %}
-        <p>{{ trending_rank }}</p>
-    {% else %}
-        <p>-</p>
-    {% endif %}
-    <p>Score:</p>
-    {% if wine.get_avg_score %}
-        {{ wine.get_avg_score.score__avg }}
-    {% else %}
-        No ratings yet.
-    {% endif %}
-
-
-    <p>Type:
-        {% for type in wine.types.all %}
-            <a href="{% url 'wine:wine_list_by_type' type.slug %}">
-                {{ type.name }}
-            </a>
-            {% if not forloop.last %},{% endif %}
-        {% endfor %}
-    </p>
-
-    <h1>Give us your opinion:</h1>
-
-    {% if request.user.is_authenticated %}
-        <form method="post">
-            {{ form|crispy }}
-            {% csrf_token %}
-            <p><input type="submit" value="Submit"></p>
-        </form>
-    {% else %}
-        <p><a href="{% url 'accounts:login' %}"> Login HERE!! </a></p>
-    {% endif %}
-
-    <br/>
-    <p>Price:</p>
-    <p>{{ wine.price }}</p>
-
-    <h1>Recommendations:</h1>
-
-    {% for object in wine.get_similar_wines %}
-        <p><a href="{{ object.get_absolute_url }}"> {{ object }} </a></p>
-    {% empty %}
-        <p>There are no recommendations in the DB yet.</p>
-    {% endfor %}
-
-    {% show_latest_evaluations instance=wine %}
-
 </div>
+
+
+    <h3 class="title">Latest evaluations</h3>
+    <div class="list-container evaluations">
+        {% show_latest_evaluations instance=wine %}
+    </div>
+
 {% endblock %}
