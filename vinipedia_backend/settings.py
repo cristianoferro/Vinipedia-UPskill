@@ -158,12 +158,11 @@ USE_TZ = True
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
-STATIC_URL = '/static/'
-
 # STATIC_ROOT: this tells Django where to:
 #   (a) put the static files when you run "python manage.py collectstatic"
 #   (b) find the static files when you run the application
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
@@ -179,14 +178,12 @@ django_heroku.settings(locals())
 
 # Storage on S3 settings are stored as os.environs to keep settings.py clean
 
-AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
-AWS_ACCESS_KEY = os.environ['AWS_ACCESS_KEY']
+AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
-STATIC_URL = S3_URL
-
+AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
 AWS_S3_REGION_NAME = 'eu-central-1'
 AWS_S3_SIGNATURE_VERSION = 's3v4'
