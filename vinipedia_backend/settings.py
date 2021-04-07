@@ -13,16 +13,7 @@ import os
 from pathlib import Path
 import django_heroku
 
-os.environ['HEROKU_DB_NAME'] = "d63l3gngqdouif"
-os.environ['HEROKU_DB_USER'] = "nqofiglkvurrnt"
-os.environ['HEROKU_DB_PASSWORD'] = "d564f75123ab111b9a644eefb52ff1540c65338bf6926f21880c1f0495a65835"
-os.environ['HEROKU_DB_HOST'] = "ec2-54-155-87-214.eu-west-1.compute.amazonaws.com"
-os.environ['HEROKU_DB_PORT'] = "5432"
 
-# S3 deployment info
-os.environ['AWS_STORAGE_BUCKET_NAME'] = "YOUR AWS S3 BUCKET NAME"
-os.environ['AWS_ACCESS_KEY'] = "XXXXXXXXXXXXXXXXXXXX"
-os.environ['AWS_SECRET_ACCESS_KEY'] = "XXXXXXXXXXXXXXXXXXXX"
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -34,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '7hj7u18_jighof&a*#uk29c%3-5-uo37=s+*hy#sy(^z-wt40x'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['winecense.herokuapp.com']
 
@@ -196,3 +187,8 @@ if not DEBUG:
     STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
     S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
     STATIC_URL = S3_URL
+
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+AWS_S3_REGION_NAME = 'eu-central-1'
+AWS_S3_SIGNATURE_VERSION = 's3v4'
