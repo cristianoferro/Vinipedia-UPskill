@@ -2,7 +2,7 @@
 {% block content %}
     {% load wine_tags %}
 
-    <h1 class="list-title">All Wines Listed</h1>
+    <h1 class="title">All Wines Listed</h1>
 
 
     <div class="list-container">
@@ -28,10 +28,10 @@
 
 
                     <p>
-                        <i>{{ wine.producer }}</i>
+                        <i>{{ wine.producer|title }}</i>
                     </p>
                     <p>
-                        <b><a href="{{ wine.get_absolute_url }}">{{ wine.name }}</a></b>
+                        <b><a href="{{ wine.get_absolute_url }}">{{ wine.name|title }}</a></b>
                     </p>
                     <p>{{ wine.description }}</p>
                     <br/>
