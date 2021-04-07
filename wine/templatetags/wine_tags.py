@@ -25,3 +25,7 @@ def get_trending_wines(count=4):
 def show_attribution(model):
     picture_author = model.img_author
     return {"picture_author": picture_author}
+
+@register.filter
+def subtract(value, arg):
+    return value - arg
