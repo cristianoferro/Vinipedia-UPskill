@@ -115,6 +115,9 @@
                 <p>There are no recommendations in the DB yet.</p>
             {% endfor %}
             <h3>About {{wine.producer.name}}</h3>
+            <p>{{wine.producer.description}}</p>
+            <p>Address: {{wine.producer.address}}</p>
+            <a href="{{wine.producer.website}}">Website</a>
             <div class="list-container">
                 {% for picture in wine.producer.producerpicture_set.all %}
                 <div class="list-element">
