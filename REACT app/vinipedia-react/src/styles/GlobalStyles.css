@@ -12,13 +12,11 @@ h4 {
   font-weight: 700;
   color: #58595b;
 }
-
 a {
   color: #58595b;
   text-decoration: none;
   transition: 0.3s;
 }
-
 a:hover {
   text-shadow: 0 0.1em 0.2em #ba3f1d7c;
   transition: 0.15s;
@@ -28,8 +26,25 @@ p {
   margin: 0;
 }
 
+::-webkit-scrollbar {
+  position: absolute;
+  width: 0.5vw;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #dddddd77;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 0.5rem;
+  background-color: #ba3f1d7c;
+}
+
 .not-found {
   font-size: 0.5rem;
+}
+.invalid-feedback {
+  color: red;
 }
 
 .menu {
@@ -39,7 +54,6 @@ p {
   align-items: center;
   padding: 0 3.125vw;
 }
-
 .menu img {
   height: 100%;
 }
@@ -48,7 +62,6 @@ p {
   height: 100%;
   max-height: 50%;
 }
-
 .menu-page {
   margin-left: 3.125vw;
 }
@@ -61,7 +74,6 @@ p {
   padding: 0 3.125vw 0 0;
   justify-content: flex-end;
 }
-
 .accounts-menu img {
   height: 50%;
 }
@@ -91,7 +103,6 @@ nav li {
 .search_box input {
   float: none;
 }
-
 input[type="image" i] {
   position: absolute;
   width: 1.5vw;
@@ -114,9 +125,7 @@ input {
   border-radius: 3rem;
   padding-left: 3vw;
 }
-
 .search_box {
-  background-color: #f9f9f9;
   position: relative;
   width: 37.5vw;
   height: 6.25vh;
@@ -153,4 +162,47 @@ input {
   color: #58595b;
   display: flex;
   align-items: center;
+}
+
+/**************************** Attribution *****************************/
+
+.attribution {
+  position: absolute;
+  right: 1rem;
+  width: 1.5rem;
+  bottom: 1rem;
+  z-index: 20;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  overflow: hidden;
+}
+.attribution-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  background-color: #efefef7c;
+}
+.attribution-detail {
+  display: flex;
+  justify-content: flex-end;
+  width: 35vw;
+  align-items: center;
+}
+.attribution:hover {
+  width: 35vw;
+}
+.attribution-hidden {
+  display: flex;
+  justify-content: center;
+  min-width: 25vw;
+  align-items: center;
+  margin: 0 0.2rem 0 0;
+  background-color: #efefefdd;
+  height: 1.5rem;
+  border-radius: 0.75rem;
+  padding: 0 0.5rem;
 }
