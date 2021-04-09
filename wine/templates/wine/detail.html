@@ -114,9 +114,18 @@
             {% empty %}
                 <p>There are no recommendations in the DB yet.</p>
             {% endfor %}
+            <div class="list-container">
+                {% for picture in wine.producer.producerpicture_set.all %}
+                <div class="list-element">
+                    <div class="wine-bottle-image">
+                        <img src="{{ picture.pathname.url }}">
+                        {% show_attribution picture %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
-
 </div>
 
 
