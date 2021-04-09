@@ -22,7 +22,7 @@ class WineList(ListView):  # (Substitui o view abaixo!)
     template_name = 'wine/list.html'
     context_object_name = 'wines'  # (Alterar nome do contexto para ser usado no template)
     model = Wine
-    paginate_by = 2 # todo: mudar o nr
+    paginate_by = 8
 
     def get_context_data(self, **kwargs):
         context = super(WineList, self).get_context_data(**kwargs)
