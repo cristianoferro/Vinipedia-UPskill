@@ -10,9 +10,8 @@ from django.db.models import Q, Avg
 def search(request):
     query = request.GET.get("query")
     wine_query = Wine.objects.filter(
-        (Q(name__contains=query) | Q(types__name__contains=query) | Q(producer__name__contains=query))
+        (Q(name__icontains=query) | Q(types__name__icontains=query) | Q(producer__name__icontains=query))
     )
-    print('TESTING##################################################################################', wine_query)
     context = {'wines': wine_query}
 
     return render(request, 'wine/search.html',
