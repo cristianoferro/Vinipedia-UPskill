@@ -1,35 +1,57 @@
 {% extends "base.html" %}
 {% block content %}
     <h1>Search results:</h1>
-    {% for wine in wines %}
-        <h2>
-            <a href="{{ wine.get_absolute_url }}">
-                {{ wine.name }}
-            </a>
-        </h2>
+    <div class="list-element">
         {% if wine.picture %}
-            <img src="{{ wine.picture.url }}" alt="{{ wine.name }}" height=295.15 width=197.4>
+            <div class="wine-bottle-image">
+                <img src="{{ wine.picture.url }}">
+                </img>
+            </div>
         {% else %}
-            <p><b>No image!</b></p>
+
+            <div class="wine-bottle-image">
+                <img src="/media/images/wines/No wine image.png">
+                </img>
+            </div>
+            <!-- <p class="not-found">No image found</p> -->
         {% endif %}
-        <p>producer - {{ wine.producer }}</p>
-        {% for type in wine.types.all %}
-            <a href="{% url 'wine:wine_list_by_type' type.slug %}">
-            {{type.name}}
-        </a>
-        {% if not forloop.last %},{% endif %}
-        {% empty %}
+        <div class="wine-contents">
 
-        {% endfor %}
 
-        {% for grape in wine.grapes.all %}
-            <p>grapes - {{ grape }}</p>
-        {% empty %}
-            <p>No matching grapes were found.</p>
-        {% endfor %}
-    {% empty %}
-        <p>
-            No matching wines were found.
-        </p>
-    {% endfor %}
+            <p>
+                <i>{{ wine.producer }}</i>
+            </p>
+            <p>
+                <b><a href="{{ wine.get_absolute_url }}">{{ wine.name }}</a></b>
+            </p>
+            <br/>
+
+
+            <p>Score:</p>
+            {% if wine.get_avg_score %}
+                {{ wine.get_avg_score.score__avg }}
+            {% else %}
+                No ratings yet.
+            {% endif %}
+
+            <div class="rank-contents">
+
+
+                <p class="rank"><img src="/media/icons/rank.png"/>Rank</p>
+                <div class="rank-separator"></div>
+                {% if wine.pageviews > 0 %}
+
+                    <p><span class="rank-nr">Nº {{ wine.trending_rank }}
+
+                </span> Trending</p>
+
+                {% else %}
+
+                    <p>Not ranked</p>
+
+                {% endif %}
+            </div>
+        </div>
+        <div class="darker-background"></div>
+    </div>
 {% endblock %}
