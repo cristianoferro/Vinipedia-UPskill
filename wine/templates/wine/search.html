@@ -1,57 +1,88 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>Search results:</h1>
-    <div class="list-element">
-        {% if wine.picture %}
-            <div class="wine-bottle-image">
-                <img src="{{ wine.picture.url }}">
-                </img>
-            </div>
-        {% else %}
 
-            <div class="wine-bottle-image">
-                <img src="/media/images/wines/No wine image.png">
-                </img>
-            </div>
-            <!-- <p class="not-found">No image found</p> -->
-        {% endif %}
-        <div class="wine-contents">
-
-
-            <p>
-                <i>{{ wine.producer }}</i>
-            </p>
-            <p>
-                <b><a href="{{ wine.get_absolute_url }}">{{ wine.name }}</a></b>
-            </p>
-            <br/>
-
-
-            <p>Score:</p>
-            {% if wine.get_avg_score %}
-                {{ wine.get_avg_score.score__avg }}
-            {% else %}
-                No ratings yet.
-            {% endif %}
-
-            <div class="rank-contents">
-
-
-                <p class="rank"><img src="/media/icons/rank.png"/>Rank</p>
-                <div class="rank-separator"></div>
-                {% if wine.pageviews > 0 %}
-
-                    <p><span class="rank-nr">Nº {{ wine.trending_rank }}
-
-                </span> Trending</p>
-
+    <h1 class="title">All Wines Listed</h1>
+    <div class="list-container">
+        {% for wine in wines %}
+            <div class="list-element">
+                {% if wine.picture %}
+                    <div class="wine-bottle-image">
+                        <img src="{{ wine.picture.url }}">
+                        </img>
+                    </div>
                 {% else %}
 
-                    <p>Not ranked</p>
-
+                    <div class="wine-bottle-image">
+                        <img src="/media/images/wines/No wine image.png">
+                        </img>
+                    </div>
+                    <!-- <p class="not-found">No image found</p> -->
                 {% endif %}
+                <div class="wine-contents">
+
+
+                    <p>
+                        <i>{{ wine.producer }}</i>
+                    </p>
+                    <p>
+                        <b><a href="{{ wine.get_absolute_url }}">{{ wine.name }}</a></b>
+                    </p>
+                    <br/>
+
+
+                    <p>Score:</p>
+                    {% if wine.get_avg_score %}
+                        {{ wine.get_avg_score.score__avg }}
+                    {% else %}
+                        No ratings yet.
+                    {% endif %}
+
+                    <div class="rank-contents">
+
+
+                        <p class="rank"><img src="/media/icons/rank.png"/>Rank</p>
+                        <div class="rank-separator"></div>
+                        {% if wine.pageviews > 0 %}
+
+                            <p><span class="rank-nr">Nº {{ wine.trending_rank }}
+
+                        </span> Trending</p>
+
+                        {% else %}
+
+                            <p>Not ranked</p>
+
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="darker-background"></div>
             </div>
+        {% empty %}
+            <p>
+                There are no wines in the DB yet.
+            </p>
+        {% endfor %}
+    </div>
+    <div class="container">
+        <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+            <p class="next">
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            </p>
+            {% endif %}
+        </span>
         </div>
-        <div class="darker-background"></div>
+
     </div>
 {% endblock %}
