@@ -73,11 +73,11 @@ REST_FRAMEWORK = {
 }
 
 MIDDLEWARE = [
-    'django.middleware.common.CommonMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -157,8 +157,6 @@ USE_TZ = True
 # LOGIN_REDIRECT_URL = 'vinipedia_backend:post_list'
 # LOGIN_URL = 'accounts:login'
 # LOGOUT_URL = 'accounts:logout'
-
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
 # STATIC_ROOT: this tells Django where to:
