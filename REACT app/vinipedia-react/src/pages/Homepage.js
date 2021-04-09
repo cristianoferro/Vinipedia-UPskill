@@ -1,31 +1,34 @@
+import { Link } from "react-router-dom";
+import Banner from "../media/banner.jpg";
+
 export default function Homepage() {
   return (
-    <div class="banner-trending">
-      <img src="/media/7.jpg" />
-      <h1 class="trending-message">
+    <div className="banner-trending">
+      <img src={Banner} alt="Banner" />
+      <h1 className="trending-message">
         <span>
           <strong>Trending portuguese wines</strong>
           <br />
           All over the world
         </span>
       </h1>
-      <div class="attribution">
-        <div class="attribution-detail">
-          <div class="attribution-hidden">
+      <div className="attribution">
+        <div className="attribution-detail">
+          <div className="attribution-hidden">
             <p>
               Photo by{" "}
-              <a class="author" href="author_url">
+              <Link className="author" to="/">
                 {" "}
                 X{" "}
-              </a>
+              </Link>
               from
-              <a class="link-name" href="picture_url">
+              <Link className="link-name" to="/">
                 {" "}
                 X{" "}
-              </a>
+              </Link>
             </p>
           </div>
-          <div class="attribution-icon">i</div>
+          <div className="attribution-icon">i</div>
         </div>
       </div>
     </div>

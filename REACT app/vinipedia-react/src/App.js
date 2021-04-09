@@ -1,12 +1,18 @@
+import { Route, Switch } from "react-router";
 import Nav from "./components/Nav";
+import SearchBar from "./components/SearchBar";
 import Homepage from "./pages/Homepage";
 
 function App() {
   return (
     <div className="App">
-      <Nav />
-      <SearchBar />
-      <Homepage />
+      <Switch>
+        <Route path="/" exact>
+          <Nav />
+          <SearchBar />
+          <Homepage />
+        </Route>
+      </Switch>
     </div>
   );
 }
