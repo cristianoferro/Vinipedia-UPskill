@@ -78,7 +78,7 @@
                 <div class="ratings-detail">
                     <div class="score-detail">
                         {% if wine.get_avg_score %}
-                            <b>{{ wine.get_avg_score.score__avg }}</b>/5
+                            <b>{{ wine.get_avg_score.score__avg|floatformat:1 }}</b>/5
                         {% else %}
                             No ratings yet.
                         {% endif %}

@@ -5,15 +5,13 @@
                 {% if wine.picture %}
                     <div class="wine-bottle-image">
                         <img src="{{ wine.picture.url }}">
-                        </img>
+                        {% show_attribution wine %}
                     </div>
                 {% else %}
 
                     <div class="wine-bottle-image">
                         <img src="/media/images/wines/No wine image.png">
-                        </img>
                     </div>
-                    <!-- <p class="not-found">No image found</p> -->
                 {% endif %}
                 <div class="wine-contents">
 
@@ -29,7 +27,7 @@
 
                     <p>Score:</p>
                     {% if wine.get_avg_score %}
-                        {{ wine.get_avg_score.score__avg }}
+                        {{ wine.get_avg_score.score__avg|floatformat:1 }}
                     {% else %}
                         No ratings yet.
                     {% endif %}
